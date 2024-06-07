@@ -1,12 +1,16 @@
 "use client"
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Meteors } from '@/components/ui/meteors';
 
-function page() {
-  const {register,handleSubmit,formState: { errors }}=useForm();
+interface FormData{
+  email:string,
+  message:string
+}
 
-  async function signup(data){
+function Page() {
+  const {register,handleSubmit,formState: { errors }}=useForm<FormData>();
+
+  async function signup(data:FormData){
     console.log(data);
   }
 
@@ -27,7 +31,7 @@ function page() {
                 <input className='border-black border-2 rounded-md px-2 py-1 text-center text-lg'
                   type="email" id="email" placeholder='Email'
                   {...register("email",{required:true})}/>
-                <textarea id="message" cols="40" rows="8"
+                <textarea id="message" cols={50} rows={8}
                   className='border-2 border-black px-1 py-1 rounded-lg font-serif ' placeholder='Type your message'
                   {...register("message",{required:true, minLength:20,maxLength:300})}></textarea>
               </div>
@@ -42,4 +46,4 @@ function page() {
   )
 }
 
-export default page;
+export default Page;
